@@ -72,6 +72,9 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
             }
           >
             <TextField
+              inputProps={{
+                maxLength: 120,
+              }}
               required
               id="outlined-required"
               label="Nome"
@@ -110,6 +113,9 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
               variant="outlined"
             />
             <TextField
+              inputProps={{
+                maxLength: 500,
+              }}
               value={form.obs}
               onChange={(e) => setForm({ ...form, obs: e.target.value })}
               id="outlined-multiline-flexible"

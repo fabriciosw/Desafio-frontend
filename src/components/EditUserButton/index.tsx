@@ -77,6 +77,9 @@ export default function EditUserButton({ setUsers, user }: Props): JSX.Element {
               variant="outlined"
             />
             <TextField
+              inputProps={{
+                maxLength: 500,
+              }}
               value={form.obs}
               onChange={(e) => setForm({ ...form, obs: e.target.value })}
               id="outlined-multiline-flexible"
