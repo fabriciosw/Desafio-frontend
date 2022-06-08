@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import DeleteIcon from '@mui/icons-material/Delete';
 import IUser from '../../interfaces/IUser';
 import { getUsers, deleteUser } from '../../services/users.service';
 import toastMsg, { ToastType } from '../../utils/toastMsg';
@@ -48,7 +49,7 @@ export default function DeleteUserButton({ id, setUsers }: Props): JSX.Element {
 
   return (
     <>
-      <Button variant="outlined" onClick={handleOpen} color="error">
+      <Button variant="outlined" onClick={handleOpen} color="error" startIcon={<DeleteIcon />}>
         Deletar usuário
       </Button>
       <Modal

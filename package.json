@@ -6,6 +6,7 @@
     "@brazilian-utils/brazilian-utils": "^1.0.0-rc.12",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.8.3",
     "@mui/material": "^5.8.2",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^11.1.0",

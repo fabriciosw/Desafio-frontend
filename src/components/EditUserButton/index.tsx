@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem/MenuItem';
+import EditIcon from '@mui/icons-material/Edit';
 import { getUsers, updateUser } from '../../services/users.service';
 import IUser from '../../interfaces/IUser';
 import formatDateBR from '../../utils/formatDateBR';
@@ -71,7 +72,7 @@ export default function EditUserButton({ user, setUsers }: Props): JSX.Element {
 
   return (
     <>
-      <Button variant="outlined" onClick={handleOpen}>
+      <Button variant="outlined" onClick={handleOpen} startIcon={<EditIcon />}>
         Editar usuário
       </Button>
       <Modal

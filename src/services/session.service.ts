@@ -6,7 +6,8 @@ import HttpClient from './httpClient';
 export async function loginUser(
   cpf: string,
   password: string,
-  setIsAuthenticated: (x: boolean) => void
+  setIsAuthenticated: (x: boolean) => void,
+  setIsAdmin: (x: boolean) => void
 ): Promise<void> {
   const obj = {
     cpf,
@@ -16,7 +17,11 @@ export async function loginUser(
   await HttpClient.api
     .post('/session/', obj)
     .then((response) => {
-      localStorage.setItem('TOKEN_KEY', response.data);
+      const token = response.data;
+      const decoded: { auth: string } = jwt_decode(token);
+      const authorization = decoded.auth;
+      if (authorization === 'true') setIsAdmin(true);
+      localStorage.setItem('TOKEN_KEY', token);
       setIsAuthenticated(true);
       HttpClient.api.defaults.headers.common.Authorization = getTokenStorage();
       toastMsg(ToastType.Success, 'Logged in');

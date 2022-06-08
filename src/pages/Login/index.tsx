@@ -4,7 +4,7 @@ import { loginUser } from '../../services/session.service';
 
 export default function Login(): JSX.Element {
   const [form, setForm] = useState({ cpf: '', password: '' });
-  const { setIsAuthenticated } = AuthenticationContext();
+  const { setIsAuthenticated, setIsAdmin } = AuthenticationContext();
 
   interface loginUser {
     cpf: string;
@@ -13,7 +13,7 @@ export default function Login(): JSX.Element {
 
   const loginUserHandler = async (event: React.FormEvent, { cpf, password }: loginUser): Promise<void> => {
     event.preventDefault();
-    await loginUser(cpf, password, setIsAuthenticated);
+    await loginUser(cpf, password, setIsAuthenticated, setIsAdmin);
   };
 
   return (

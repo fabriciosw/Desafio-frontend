@@ -96,9 +96,6 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Novo usuário
           </Typography>
-          {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography> */}
           <form onSubmit={(event) => createUserHandler(event, form)}>
             <TextField
               inputProps={{
