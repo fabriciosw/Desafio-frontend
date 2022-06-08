@@ -73,7 +73,7 @@ export default function EditUserButton({ user, setUsers }: Props): JSX.Element {
   return (
     <>
       <Button variant="outlined" onClick={handleOpen} startIcon={<EditIcon />}>
-        Editar usuário
+        Editar
       </Button>
       <Modal
         open={open}

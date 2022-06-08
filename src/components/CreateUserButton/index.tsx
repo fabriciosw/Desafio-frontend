@@ -26,6 +26,17 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
     }
   };
 
+  const cleanForm = {
+    cpf: '',
+    name: '',
+    birthDate: '',
+    password: '',
+    obs: '',
+    permission: 'false',
+  };
+
+  const [form, setForm] = useState(cleanForm);
+
   interface CreateUser {
     name: string;
     birthDate: string;
@@ -42,6 +53,8 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
     event.preventDefault();
     try {
       const data = await createUser(name, cpf, birthDate, password, obs, permission);
+      handleClose();
+      setForm(cleanForm);
       toastMsg(ToastType.Success, data);
       fetchUsers();
     } catch (error) {
@@ -59,15 +72,6 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
       label: 'Administrador',
     },
   ];
-
-  const [form, setForm] = useState({
-    cpf: '',
-    name: '',
-    birthDate: '',
-    password: '',
-    obs: '',
-    permission: 'false',
-  });
 
   const style = {
     position: 'absolute',

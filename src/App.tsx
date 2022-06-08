@@ -6,7 +6,7 @@ import Routes from './routes';
 
 const App: React.FunctionComponent = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [isAdmin, setIsAdmin] =  useState<boolean>(false);
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
   return (
     <Authentication.Provider value={{ isAuthenticated, setIsAuthenticated, isAdmin, setIsAdmin }}>
       <Router>

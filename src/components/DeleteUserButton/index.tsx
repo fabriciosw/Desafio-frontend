@@ -50,7 +50,7 @@ export default function DeleteUserButton({ id, setUsers }: Props): JSX.Element {
   return (
     <>
       <Button variant="outlined" onClick={handleOpen} color="error" startIcon={<DeleteIcon />}>
-        Deletar usuário
+        Deletar
       </Button>
       <Modal
         open={open}
