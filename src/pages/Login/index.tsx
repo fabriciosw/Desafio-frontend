@@ -1,8 +1,12 @@
+import { TextField, TextFieldProps } from '@mui/material';
 import React, { useState } from 'react';
 import { AuthenticationContext } from '../../contexts/AuthenticationContext';
 import { loginUser } from '../../services/session.service';
 
-export default function Login(): JSX.Element {
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const InputMask = require('react-input-mask');
+
+export default function Login(): React.ReactElement {
   const [form, setForm] = useState({ cpf: '', password: '' });
   const { setIsAuthenticated, setIsAdmin } = AuthenticationContext();
 
@@ -21,28 +25,27 @@ export default function Login(): JSX.Element {
       <div className="campos">
         <label htmlFor="cpf">
           Digite seu CPF
-          <input
+          <InputMask
+            mask="999.999.999-99"
+            onChange={(evento: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, cpf: evento.target.value })}
             value={form.cpf}
-            onChange={(evento) => setForm({ ...form, cpf: evento.target.value })}
-            type="number"
-            name="cpf"
-            id="cpf"
-            placeholder="CPF"
-            required
-          />
+          >
+            {(inputProps: JSX.IntrinsicAttributes & TextFieldProps) => (
+              <TextField {...inputProps} variant="filled" id="cpf" label="CPF" required />
+            )}
+          </InputMask>
         </label>
-        <label htmlFor="password">
-          Digite sua senha
-          <input
-            value={form.password}
-            onChange={(evento) => setForm({ ...form, password: evento.target.value })}
-            type="password"
-            name="password"
-            id="password"
-            placeholder="password"
-            required
-          />
-        </label>
+        Digite sua senha
+        <TextField
+          variant="filled"
+          value={form.password}
+          onChange={(evento) => setForm({ ...form, password: evento.target.value })}
+          type="password"
+          name="password"
+          id="password"
+          label="Senha"
+          required
+        />
         <input type="submit" data-testid="logar" />
       </div>
     </form>

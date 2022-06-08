@@ -18,7 +18,7 @@ export async function createUser(
   let permission = false;
   if (permissionString === 'true') permission = true;
 
-  if (cpf.length !== 11) {
+  if (cpf.length !== 14) {
     return 'CPF inválido';
   }
   let obs = obsReq;

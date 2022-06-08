@@ -1,13 +1,11 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem/MenuItem';
+import { TextField, TextFieldProps, Modal, Typography, Button, Box, MenuItem } from '@mui/material';
 import IUser from '../../interfaces/IUser';
 import { createUser, getUsers } from '../../services/users.service';
 import toastMsg, { ToastType } from '../../utils/toastMsg';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const InputMask = require('react-input-mask');
 
 interface Props {
   setUsers: Dispatch<SetStateAction<IUser[]>>;
@@ -113,25 +111,26 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
               defaultValue=""
               variant="outlined"
             />
-            <TextField
-              required
+            <InputMask
+              mask="999.999.999-99"
+              onChange={(evento: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, cpf: evento.target.value })}
               value={form.cpf}
-              onChange={(e) => setForm({ ...form, cpf: e.target.value })}
-              id="cpf"
-              label="CPF"
-              type="number"
-              defaultValue=""
-              variant="outlined"
-            />
-            <TextField
-              required
+            >
+              {(inputProps: JSX.IntrinsicAttributes & TextFieldProps) => (
+                <TextField {...inputProps} variant="outlined" id="cpf" label="CPF" required />
+              )}
+            </InputMask>
+            <InputMask
+              mask="99/99/9999"
+              onChange={(evento: React.ChangeEvent<HTMLInputElement>) =>
+                setForm({ ...form, birthDate: evento.target.value })
+              }
               value={form.birthDate}
-              onChange={(e) => setForm({ ...form, birthDate: e.target.value })}
-              id="birthDate"
-              label="Data de nascimento"
-              defaultValue=""
-              variant="outlined"
-            />
+            >
+              {(inputProps: JSX.IntrinsicAttributes & TextFieldProps) => (
+                <TextField {...inputProps} variant="outlined" id="birthDate" label="Data de nascimento" required />
+              )}
+            </InputMask>
             <TextField
               required
               value={form.password}
