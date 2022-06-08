@@ -1,10 +1,10 @@
 /**
  * @description
- * Retorna uma data formatada em pt-BR dd/mm/yyyy.
+ * Retorna uma data formatada em mm/dd/yyyy.
  * Exemplo de uso:
- * formatDate('2021-10-15T03:00:00.000Z');
+ * formatDateForDatabase('30/12/2000');
  * @param {String} date
- * @return {String} 15/10/2021
+ * @return {String} 12/30/2000
  */
 
 const formatDateForDatabase = (date: string): string => {

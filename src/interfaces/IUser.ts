@@ -3,6 +3,6 @@ export default interface IUser {
   name: string;
   birthDate: string;
   obs: string;
-  cpf: number;
-  permission: boolean;
+  cpf: string;
+  permission: string;
 }

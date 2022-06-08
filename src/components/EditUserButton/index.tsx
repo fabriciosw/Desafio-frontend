@@ -1,23 +1,46 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem/MenuItem';
-import { updateUser } from '../../services/users.service';
+import { getUsers, updateUser } from '../../services/users.service';
 import IUser from '../../interfaces/IUser';
 import formatDateBR from '../../utils/formatDateBR';
+import toastMsg, { ToastType } from '../../utils/toastMsg';
 
 interface Props {
-  setUsers: (x: IUser[]) => void;
   user: IUser;
+  setUsers: Dispatch<SetStateAction<IUser[]>>;
 }
-export default function EditUserButton({ setUsers, user }: Props): JSX.Element {
+export default function EditUserButton({ user, setUsers }: Props): JSX.Element {
   const [open, setOpen] = useState(false);
   const handleOpen = (): void => setOpen(true);
   const handleClose = (): void => setOpen(false);
 
+  interface UpdateUser {
+    obs: string;
+    permission: string;
+  }
+  const fetchUsers = async (): Promise<void> => {
+    try {
+      const data = await getUsers();
+      setUsers(data);
+    } catch (error) {
+      toastMsg(ToastType.Error, (error as Error).message);
+    }
+  };
+  const updateUserHandler = async (event: React.FormEvent, { obs, permission }: UpdateUser): Promise<void> => {
+    event.preventDefault();
+    try {
+      const data = await updateUser(user.id, obs, permission);
+      toastMsg(ToastType.Success, data);
+      fetchUsers();
+    } catch (error) {
+      toastMsg(ToastType.Error, (error as Error).message);
+    }
+  };
   const permissions = [
     {
       value: 'false',
@@ -64,7 +87,7 @@ export default function EditUserButton({ setUsers, user }: Props): JSX.Element {
           {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
           </Typography> */}
-          <form onSubmit={(event) => updateUser(event, user.id, form.obs, form.permission, setUsers)}>
+          <form onSubmit={(event) => updateUserHandler(event, form)}>
             <TextField disabled id="name" label="Nome" value={user.name} variant="outlined" />
             <TextField disabled value={user.cpf} id="cpf" label="CPF" variant="outlined" />
             <TextField

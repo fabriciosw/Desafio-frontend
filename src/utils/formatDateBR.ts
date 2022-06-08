@@ -5,7 +5,7 @@ import { format, zonedTimeToUtc } from 'date-fns-tz';
  * @description
  * Retorna uma data formatada em pt-BR dd/mm/yyyy.
  * Exemplo de uso:
- * formatDate('2021-10-15T03:00:00.000Z');
+ * formatDateBR('2021-10-15T03:00:00.000Z');
  * @param {String} date
  * @return {String} 15/10/2021
  */

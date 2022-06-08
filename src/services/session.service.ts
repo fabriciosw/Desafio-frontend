@@ -1,28 +1,29 @@
 import jwt_decode from 'jwt-decode';
 import getTokenStorage from '../utils/getTokenStorage';
+import toastMsg, { ToastType } from '../utils/toastMsg';
 import HttpClient from './httpClient';
 
-export function loginUser(
-  event: React.FormEvent,
+export async function loginUser(
   cpf: string,
   password: string,
   setIsAuthenticated: (x: boolean) => void
-): void {
-  event.preventDefault();
-
+): Promise<void> {
   const obj = {
     cpf,
     password,
   };
-  HttpClient.api
-    .post('/session/', obj)
 
+  await HttpClient.api
+    .post('/session/', obj)
     .then((response) => {
       localStorage.setItem('TOKEN_KEY', response.data);
       setIsAuthenticated(true);
       HttpClient.api.defaults.headers.common.Authorization = getTokenStorage();
+      toastMsg(ToastType.Success, 'Logged in');
+    })
+    .catch(() => {
+      toastMsg(ToastType.Error, 'Incorrect credentials');
     });
-  // .catch((erro) => console.log(erro))
 }
 
 export function logoutUser(): void {

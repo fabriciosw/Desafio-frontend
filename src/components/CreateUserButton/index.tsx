@@ -1,20 +1,53 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem/MenuItem';
-import { createUser } from '../../services/users.service';
 import IUser from '../../interfaces/IUser';
+import { createUser, getUsers } from '../../services/users.service';
+import toastMsg, { ToastType } from '../../utils/toastMsg';
 
 interface Props {
-  setUsers: (x: IUser[]) => void;
+  setUsers: Dispatch<SetStateAction<IUser[]>>;
 }
 export default function CreateUserButton({ setUsers }: Props): JSX.Element {
   const [open, setOpen] = useState(false);
   const handleOpen = (): void => setOpen(true);
   const handleClose = (): void => setOpen(false);
+
+  const fetchUsers = async (): Promise<void> => {
+    try {
+      const data = await getUsers();
+      setUsers(data);
+    } catch (error) {
+      toastMsg(ToastType.Error, (error as Error).message);
+    }
+  };
+
+  interface CreateUser {
+    name: string;
+    birthDate: string;
+    obs: string;
+    cpf: string;
+    permission: string;
+    password: string;
+  }
+
+  const createUserHandler = async (
+    event: React.FormEvent,
+    { name, cpf, birthDate, password, obs, permission }: CreateUser
+  ): Promise<void> => {
+    event.preventDefault();
+    try {
+      const data = await createUser(name, cpf, birthDate, password, obs, permission);
+      toastMsg(ToastType.Success, data);
+      fetchUsers();
+    } catch (error) {
+      toastMsg(ToastType.Error, (error as Error).message);
+    }
+  };
 
   const permissions = [
     {
@@ -66,11 +99,7 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
           {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
           </Typography> */}
-          <form
-            onSubmit={(event) =>
-              createUser(event, form.name, form.cpf, form.birthDate, form.password, form.obs, form.permission, setUsers)
-            }
-          >
+          <form onSubmit={(event) => createUserHandler(event, form)}>
             <TextField
               inputProps={{
                 maxLength: 120,

@@ -5,13 +5,24 @@ import { getUsers } from '../../services/users.service';
 import CreateUserButton from '../../components/CreateUserButton';
 import DeleteUserButton from '../../components/DeleteUserButton';
 import EditUserButton from '../../components/EditUserButton';
+import toastMsg, { ToastType } from '../../utils/toastMsg';
 
 export default function Home(): JSX.Element {
   const [users, setUsers] = useState<IUser[]>([]);
 
+  const fetchUsers = async (): Promise<void> => {
+    try {
+      const data = await getUsers();
+      setUsers(data);
+    } catch (error) {
+      toastMsg(ToastType.Error, (error as Error).message);
+    }
+  };
+
   useEffect(() => {
-    getUsers(setUsers);
+    fetchUsers();
   }, []);
+
   return (
     <>
       <button type="button" onClick={() => logoutUser()}>
@@ -23,7 +34,7 @@ export default function Home(): JSX.Element {
           <p>{user.name}</p>
           <p>{user.obs}</p>
           <p>{`${user.permission}`}</p>
-          <DeleteUserButton setUsers={setUsers} id={user.id} />
+          <DeleteUserButton id={user.id} setUsers={setUsers} />
           <EditUserButton user={user} setUsers={setUsers} />
         </>
       ))}

@@ -1,20 +1,39 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import IUser from '../../interfaces/IUser';
-import { deleteUser } from '../../services/users.service';
+import { getUsers, deleteUser } from '../../services/users.service';
+import toastMsg, { ToastType } from '../../utils/toastMsg';
 
 interface Props {
-  setUsers: (x: IUser[]) => void;
   id: number;
+  setUsers: Dispatch<SetStateAction<IUser[]>>;
 }
-export default function DeleteUserButton({ setUsers, id }: Props): JSX.Element {
+export default function DeleteUserButton({ id, setUsers }: Props): JSX.Element {
   const [open, setOpen] = useState(false);
   const handleOpen = (): void => setOpen(true);
   const handleClose = (): void => setOpen(false);
 
+  const fetchUsers = async (): Promise<void> => {
+    try {
+      const data = await getUsers();
+      setUsers(data);
+    } catch (error) {
+      toastMsg(ToastType.Error, (error as Error).message);
+    }
+  };
+  const deleteUserHandler = async (event: React.FormEvent): Promise<void> => {
+    event.preventDefault();
+    try {
+      const data = await deleteUser(id);
+      toastMsg(ToastType.Success, data);
+      fetchUsers();
+    } catch (error) {
+      toastMsg(ToastType.Error, (error as Error).message);
+    }
+  };
   const style = {
     position: 'absolute',
     top: '50%',
@@ -45,7 +64,7 @@ export default function DeleteUserButton({ setUsers, id }: Props): JSX.Element {
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Deseja mesmo deletar esse usuário?
           </Typography>
-          <Button variant="contained" onClick={(e) => deleteUser(e, id, setUsers)} color="error">
+          <Button variant="contained" onClick={(e) => deleteUserHandler(e)} color="error">
             Deletar usuário
           </Button>
         </Box>
