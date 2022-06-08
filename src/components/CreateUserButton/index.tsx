@@ -76,7 +76,7 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
                 maxLength: 120,
               }}
               required
-              id="outlined-required"
+              id="name"
               label="Nome"
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -87,7 +87,7 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
               required
               value={form.cpf}
               onChange={(e) => setForm({ ...form, cpf: e.target.value })}
-              id="outlined-required"
+              id="cpf"
               label="CPF"
               type="number"
               defaultValue=""
@@ -97,7 +97,7 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
               required
               value={form.birthDate}
               onChange={(e) => setForm({ ...form, birthDate: e.target.value })}
-              id="outlined-required"
+              id="birthDate"
               label="Data de nascimento"
               defaultValue=""
               variant="outlined"
@@ -106,7 +106,7 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
               required
               value={form.password}
               onChange={(e) => setForm({ ...form, password: e.target.value })}
-              id="outlined-required"
+              id="password"
               label="Senha"
               type="password"
               defaultValue=""
@@ -118,13 +118,13 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
               }}
               value={form.obs}
               onChange={(e) => setForm({ ...form, obs: e.target.value })}
-              id="outlined-multiline-flexible"
+              id="obs"
               label="Observação"
               multiline
               maxRows={6}
             />
             <TextField
-              id="outlined-select-currency"
+              id="permission"
               select
               label="Permissão"
               value={form.permission}

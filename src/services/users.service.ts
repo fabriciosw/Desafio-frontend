@@ -1,6 +1,7 @@
 import HttpClient from './httpClient';
 import IUser from '../interfaces/IUser';
 import toastMsg, { ToastType } from '../utils/toastMsg';
+import formatDateForDatabase from '../utils/formatDateForDatabase';
 
 export function getUsers(setUsers: (x: IUser[]) => void): void {
   HttpClient.api.get<IUser[]>('/users').then((res: { data: Array<IUser> }) => setUsers(res.data));
@@ -15,7 +16,7 @@ export async function createUser(
   event: React.FormEvent,
   name: string,
   cpf: string,
-  birthDate: string,
+  unformatedDate: string,
   password: string,
   obsReq: string,
   permissionString: string,
@@ -33,6 +34,7 @@ export async function createUser(
 
   if (obsReq === '') obs = '-';
 
+  const birthDate = formatDateForDatabase(unformatedDate);
   const obj = {
     name,
     cpf,

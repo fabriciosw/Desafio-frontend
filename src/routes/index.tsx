@@ -10,9 +10,9 @@ const Routes: React.FunctionComponent = () => {
   const { isAuthenticated } = AuthenticationContext();
   const renderRoutes = (): React.ReactNode => (
     <RoutesRouter>
-      <Route path="/login" element={isAuthenticated ? <Home /> : <Login />} />
+      <Route path="/login" element={isAuthenticated ? <Navigate to="/home" replace /> : <Login />} />
       <Route path="/home" element={isAuthenticated ? <Home /> : <Navigate to="/login" replace />} />
-      <Route path="*" element={isAuthenticated ? <Home /> : <Navigate to="/login" replace />} />
+      <Route path="*" element={isAuthenticated ? <Navigate to="/home" replace /> : <Navigate to="/login" replace />} />
     </RoutesRouter>
   );
 

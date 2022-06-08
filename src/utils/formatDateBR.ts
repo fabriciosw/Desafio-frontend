@@ -10,7 +10,7 @@ import { format, zonedTimeToUtc } from 'date-fns-tz';
  * @return {String} 15/10/2021
  */
 
-const formatDate = (date: string): string => {
+const formatDateBR = (date: string): string => {
   if (!date) return '';
 
   const convertDateToISO = parseISO(date);
@@ -19,4 +19,4 @@ const formatDate = (date: string): string => {
   return newDateFormatted;
 };
 
-export default formatDate;
+export default formatDateBR;

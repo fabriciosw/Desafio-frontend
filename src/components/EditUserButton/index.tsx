@@ -7,6 +7,7 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem/MenuItem';
 import { updateUser } from '../../services/users.service';
 import IUser from '../../interfaces/IUser';
+import formatDateBR from '../../utils/formatDateBR';
 
 interface Props {
   setUsers: (x: IUser[]) => void;
@@ -29,9 +30,6 @@ export default function EditUserButton({ setUsers, user }: Props): JSX.Element {
   ];
 
   const [form, setForm] = useState({
-    cpf: user.cpf,
-    name: user.name,
-    birthDate: user.birthDate,
     obs: user.obs,
     permission: `${user.permission}`,
   });
@@ -67,12 +65,12 @@ export default function EditUserButton({ setUsers, user }: Props): JSX.Element {
             Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
           </Typography> */}
           <form onSubmit={(event) => updateUser(event, user.id, form.obs, form.permission, setUsers)}>
-            <TextField disabled id="outlined-required" label="Nome" value={form.name} variant="outlined" />
-            <TextField disabled value={form.cpf} id="outlined-required" label="CPF" variant="outlined" />
+            <TextField disabled id="name" label="Nome" value={user.name} variant="outlined" />
+            <TextField disabled value={user.cpf} id="cpf" label="CPF" variant="outlined" />
             <TextField
               disabled
-              value={form.birthDate}
-              id="outlined-required"
+              value={formatDateBR(user.birthDate)}
+              id="birthDate"
               label="Data de nascimento"
               variant="outlined"
             />
@@ -82,13 +80,13 @@ export default function EditUserButton({ setUsers, user }: Props): JSX.Element {
               }}
               value={form.obs}
               onChange={(e) => setForm({ ...form, obs: e.target.value })}
-              id="outlined-multiline-flexible"
+              id="obs"
               label="Observação"
               multiline
               maxRows={6}
             />
             <TextField
-              id="outlined-select-currency"
+              id="permission"
               select
               label="Permissão"
               value={form.permission}
