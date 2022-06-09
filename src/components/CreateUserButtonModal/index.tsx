@@ -58,7 +58,6 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
         handleClose();
         fetchUsers();
       } else toastMsg(ToastType.Error, data);
-
     } catch (error) {
       toastMsg(ToastType.Error, (error as Error).name);
     }
@@ -81,6 +80,7 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
+    borderRadius: '10px',
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,

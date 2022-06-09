@@ -1,0 +1,25 @@
+
+.content {
+  margin-top: 10vh;
+  width: 90vw !important;
+  margin: 8vh auto 0 auto;
+  display: flex;
+  flex-direction: column;
+
+  .buttons {
+    flex-direction: row;
+    margin: 5px 0;
+  }
+
+  .logout {
+    border-radius: 10px;
+    border: 0px;
+    padding: 8px 50px;
+    color: #fff;
+    background-color: #d32f2f;
+  }
+
+  button {
+    margin: 10px 0;
+  }
+}

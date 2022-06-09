@@ -6,6 +6,7 @@ import CreateUserButton from '../../components/CreateUserButtonModal';
 import toastMsg, { ToastType } from '../../utils/toastMsg';
 import { AuthenticationContext } from '../../contexts/AuthenticationContext';
 import UsersTable from '../../components/Table';
+import './style.scss';
 
 export default function Home(): JSX.Element {
   const { isAdmin } = AuthenticationContext();
@@ -26,13 +27,17 @@ export default function Home(): JSX.Element {
 
   return (
     <>
-      <button type="button" onClick={() => logoutUser()}>
-        Logout
-      </button>
+      <section className="content">
+        <h3>Usuários</h3>
+        <div className="buttons">
+          {isAdmin ? <CreateUserButton setUsers={setUsers} /> : ''}
+          <button className="logout" type="button" onClick={() => logoutUser()}>
+            Logout
+          </button>
+        </div>
 
-      {isAdmin ? <CreateUserButton setUsers={setUsers} /> : ''}
-
-      <UsersTable users={users} setUsers={setUsers} />
+        <UsersTable users={users} setUsers={setUsers} />
+      </section>
     </>
   );
 }

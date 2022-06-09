@@ -1,6 +1,5 @@
 import React from 'react';
 import { Routes as RoutesRouter, Route, Navigate } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
 import Loader from '../components/Loader';
 import Login from '../pages/Login';
 import Home from '../pages/Home';
@@ -20,9 +19,7 @@ const Routes: React.FunctionComponent = () => {
     <div className="d-flex">
       <div className="d-flex flex-column p-0 w-100">
         <main>
-          <Container fluid>
-            <React.Suspense fallback={<Loader />}>{renderRoutes()}</React.Suspense>
-          </Container>
+          <React.Suspense fallback={<Loader />}>{renderRoutes()}</React.Suspense>
         </main>
       </div>
     </div>

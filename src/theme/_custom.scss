@@ -6,7 +6,6 @@
 /*!
 * Faz o import necessário das funções e variáveis do bootstrap.
 */
-
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 
@@ -138,7 +137,7 @@ $utilities-bg-colors: map-loop($utilities-colors, rgba-css-var, '$key', 'bg');
   --is-sm: 0.875rem;
   --is-md: 1rem;
 
-  --font-family: 'Titillium Web', sans-serif;
+  --font-family: 'Poppins', sans-serif;
 }
 
 /*!
