@@ -10,8 +10,8 @@ body {
 .leftside {
   width: 55vw;
   height: 100vh;
-  background: linear-gradient(180deg, #0575E6 0%, #02298A 84.79%, #021B79 100%);
-  color: #fff;
+  background: linear-gradient(180deg, #0575e6 0%, #02298a 84.79%, #021b79 100%);
+  color: #ffffff;
   display: flex;
 
   .text {
@@ -39,19 +39,19 @@ body {
   width: 45vw;
 
   h3 {
-      font-size: 26px;
-      font-weight: 700;
-      line-height: 39px;
-      letter-spacing: 0em;
-      text-align: left;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 39px;
+    letter-spacing: 0em;
+    text-align: left;
   }
-  h5{
-      font-size: 20px;
-      font-weight: 300;
-      line-height: 27px;
-      letter-spacing: 0em;
-      text-align: left;
-      margin-bottom: 40px;
+  h5 {
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 27px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-bottom: 40px;
   }
   .login-card {
     width: 60%;
@@ -65,9 +65,9 @@ body {
 
   .submit {
     padding: 18px 26px;
-    background: #0575E6;
+    background: #0575e6;
     border-radius: 30px;
-    color: #fff;
+    color: #ffffff;
     width: 100%;
     border: 0px;
     transition: 0.5s;
