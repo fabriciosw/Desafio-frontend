@@ -23,19 +23,15 @@ export default function Login(): React.ReactElement {
   return (
     <form onSubmit={(event) => loginUserHandler(event, form)}>
       <div className="campos">
-        <label htmlFor="cpf">
-          Digite seu CPF
-          <InputMask
-            mask="999.999.999-99"
-            onChange={(evento: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, cpf: evento.target.value })}
-            value={form.cpf}
-          >
-            {(inputProps: JSX.IntrinsicAttributes & TextFieldProps) => (
-              <TextField {...inputProps} variant="filled" id="cpf" label="CPF" required />
-            )}
-          </InputMask>
-        </label>
-        Digite sua senha
+        <InputMask
+          mask="999.999.999-99"
+          onChange={(evento: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, cpf: evento.target.value })}
+          value={form.cpf}
+        >
+          {(inputProps: JSX.IntrinsicAttributes & TextFieldProps) => (
+            <TextField {...inputProps} variant="filled" id="cpf" label="CPF" required />
+          )}
+        </InputMask>
         <TextField
           variant="filled"
           value={form.password}

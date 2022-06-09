@@ -28,6 +28,7 @@ export default function EditUserButton({ user, setUsers }: Props): JSX.Element {
     try {
       const data = await getUsers();
       setUsers(data);
+      handleClose();
     } catch (error) {
       toastMsg(ToastType.Error, (error as Error).message);
     }

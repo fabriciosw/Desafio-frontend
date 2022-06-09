@@ -51,12 +51,16 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
     event.preventDefault();
     try {
       const data = await createUser(name, cpf, birthDate, password, obs, permission);
-      handleClose();
+
       setForm(cleanForm);
-      toastMsg(ToastType.Success, data);
-      fetchUsers();
+      if (data === 'User created') {
+        toastMsg(ToastType.Success, data);
+        handleClose();
+        fetchUsers();
+      } else toastMsg(ToastType.Error, data);
+
     } catch (error) {
-      toastMsg(ToastType.Error, (error as Error).message);
+      toastMsg(ToastType.Error, (error as Error).name);
     }
   };
 

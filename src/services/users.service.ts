@@ -12,7 +12,7 @@ export async function createUser(
   cpf: string,
   unformatedDate: string,
   password: string,
-  obsReq: string,
+  obs: string,
   permissionString: string
 ): Promise<string> {
   let permission = false;
@@ -21,9 +21,6 @@ export async function createUser(
   if (cpf.length !== 14) {
     return 'CPF inválido';
   }
-  let obs = obsReq;
-
-  if (obsReq === '') obs = '-';
 
   const birthDate = formatDateForDatabase(unformatedDate);
   const obj = {
@@ -38,13 +35,9 @@ export async function createUser(
   return data;
 }
 
-export async function updateUser(id: number, obsReq: string, permissionString: string): Promise<string> {
+export async function updateUser(id: number, obs: string, permissionString: string): Promise<string> {
   let permission = false;
   if (permissionString === 'true') permission = true;
-
-  let obs = obsReq;
-
-  if (obsReq === '') obs = '-';
 
   const obj = {
     obs,

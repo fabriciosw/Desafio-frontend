@@ -27,7 +27,7 @@ export default function UsersTable({ users, setUsers }: Props): JSX.Element {
       </TableHead>
 
       {users.map((user) => (
-        <TableRow hover key={user.cpf}>
+        <TableRow hover key={user.id}>
           <TableCell align="center">{user.name}</TableCell>
           <TableCell align="center">{formatDateBR(user.birthDate)}</TableCell>
           <TableCell align="center">{user.cpf}</TableCell>
