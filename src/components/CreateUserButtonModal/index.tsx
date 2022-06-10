@@ -115,7 +115,6 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
               label="Nome"
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
-              defaultValue=""
               variant="outlined"
             />
             <InputMask
@@ -148,7 +147,6 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
               id="password"
               label="Senha"
               type="password"
-              defaultValue=""
               variant="outlined"
             />
             <TextField

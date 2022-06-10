@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, TableCell, TableHead, TableRow } from '@mui/material';
+import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import IUser from '../../interfaces/IUser';
 import DeleteUserButton from '../DeleteUserButtonModal';
 import EditUserButton from '../EditUserButtonModal';
@@ -25,26 +25,27 @@ export default function UsersTable({ users, setUsers }: Props): JSX.Element {
           {isAdmin ? <TableCell align="center">Gerenciar</TableCell> : ''}
         </TableRow>
       </TableHead>
-
-      {users.map((user) => (
-        <TableRow hover key={user.id}>
-          <TableCell align="center">{user.name}</TableCell>
-          <TableCell align="center">{formatDateBR(user.birthDate)}</TableCell>
-          <TableCell align="center">{user.cpf}</TableCell>
-          <TableCell align="center">{user.permission ? 'Administrador' : 'Colaborador'}</TableCell>
-          <TableCell align="center" sx={{ maxWidth: 400 }}>
-            {user.obs}
-          </TableCell>
-          {isAdmin ? (
-            <TableCell align="center">
-              <DeleteUserButton id={user.id} setUsers={setUsers} />
-              <EditUserButton user={user} setUsers={setUsers} />
+      <TableBody>
+        {users.map((user) => (
+          <TableRow hover key={user.id}>
+            <TableCell align="center">{user.name}</TableCell>
+            <TableCell align="center">{formatDateBR(user.birthDate)}</TableCell>
+            <TableCell align="center">{user.cpf}</TableCell>
+            <TableCell align="center">{user.permission ? 'Administrador' : 'Colaborador'}</TableCell>
+            <TableCell align="center" sx={{ maxWidth: 400 }}>
+              {user.obs}
             </TableCell>
-          ) : (
-            ''
-          )}
-        </TableRow>
-      ))}
+            {isAdmin ? (
+              <TableCell align="center">
+                <DeleteUserButton id={user.id} setUsers={setUsers} />
+                <EditUserButton user={user} setUsers={setUsers} />
+              </TableCell>
+            ) : (
+              ''
+            )}
+          </TableRow>
+        ))}
+      </TableBody>
     </Table>
   );
 }
