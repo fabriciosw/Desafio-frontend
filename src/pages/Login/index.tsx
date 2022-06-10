@@ -32,7 +32,7 @@ export default function Login(): React.ReactElement {
       <section className="rightside">
         <div className="login-card">
           <h3>Olá colaborador,</h3>
-          <h5>faça seu login</h5>
+          <h5>faça o seu login</h5>
           <form onSubmit={(event) => loginUserHandler(event, form)}>
             <div className="login-inputs">
               <InputMask

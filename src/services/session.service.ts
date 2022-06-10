@@ -26,8 +26,8 @@ export async function loginUser(
       HttpClient.api.defaults.headers.common.Authorization = getTokenStorage();
       toastMsg(ToastType.Success, 'Logged in');
     })
-    .catch(() => {
-      toastMsg(ToastType.Error, 'Incorrect credentials');
+    .catch((error) => {
+      toastMsg(ToastType.Error, error.response.data.message);
     });
 }
 

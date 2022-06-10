@@ -4,6 +4,7 @@ import IUser from '../../interfaces/IUser';
 import { createUser, getUsers } from '../../services/users.service';
 import toastMsg, { ToastType } from '../../utils/toastMsg';
 
+// Necessary to be imported with require
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const InputMask = require('react-input-mask');
 
@@ -58,8 +59,9 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
         handleClose();
         fetchUsers();
       } else toastMsg(ToastType.Error, data);
-    } catch (error) {
-      toastMsg(ToastType.Error, (error as Error).name);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      toastMsg(ToastType.Error, error.response.data.message);
     }
   };
 

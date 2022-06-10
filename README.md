@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="https://softdesign.com.br/wp-content/themes/bones/library/images/logotipo.svg" alt="Softdesign logo" />
-</p>
-
 # :rocket: React quickstart
 
 Esse projeto foi criado com base no [Create React App](https://github.com/facebook/create-react-app) utilizando o template de **typescript**.
@@ -27,10 +23,6 @@ Caso não tenha, instale usando o comando no terminal `$ npm install -g yarn` e 
 Mais informações: [site oficial](https://yarnpkg.com/).
 
 ### :fire: Iniciando o projeto
-
-Clone esse repositório utilizando o comando abaixo no seu terminal:
-
-`$ git clone https://github.com/SoftdesignBrasil/quickstart-react.git`
 
 Após o processo ser concluído no próprio terminal aberto localize a pasta que você acabou de clonar e dentro dela digite:
 
