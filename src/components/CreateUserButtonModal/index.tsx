@@ -3,6 +3,7 @@ import { TextField, TextFieldProps, Modal, Typography, Button, Box, MenuItem } f
 import IUser from '../../interfaces/IUser';
 import { createUser, getUsers } from '../../services/users.service';
 import toastMsg, { ToastType } from '../../utils/toastMsg';
+import './styles.scss';
 
 // Necessary to be imported with require
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -84,7 +85,6 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
     width: 400,
     borderRadius: '10px',
     bgcolor: 'background.paper',
-    border: '2px solid #000',
     boxShadow: 24,
     p: 4,
   };
@@ -101,11 +101,12 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography id="modal-modal-title" variant="h5" component="h2">
             Novo usuário
           </Typography>
           <form onSubmit={(event) => createUserHandler(event, form)}>
             <TextField
+              className="margin-top"
               inputProps={{
                 maxLength: 120,
               }}
@@ -118,6 +119,7 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
               variant="outlined"
             />
             <InputMask
+              className="margin-top"
               mask="999.999.999-99"
               onChange={(evento: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, cpf: evento.target.value })}
               value={form.cpf}
@@ -127,6 +129,7 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
               )}
             </InputMask>
             <InputMask
+              className="margin-top"
               mask="99/99/9999"
               onChange={(evento: React.ChangeEvent<HTMLInputElement>) =>
                 setForm({ ...form, birthDate: evento.target.value })
@@ -138,6 +141,7 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
               )}
             </InputMask>
             <TextField
+              className="margin-top"
               required
               value={form.password}
               onChange={(e) => setForm({ ...form, password: e.target.value })}
@@ -148,6 +152,7 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
               variant="outlined"
             />
             <TextField
+              className="margin-top"
               inputProps={{
                 maxLength: 500,
               }}
@@ -159,12 +164,12 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
               maxRows={6}
             />
             <TextField
+              className="margin-top"
               id="permission"
               select
               label="Permissão"
               value={form.permission}
               onChange={(e) => setForm({ ...form, permission: e.target.value })}
-              helperText="Selecione a permissão"
             >
               {permissions.map((option) => (
                 <MenuItem key={option.label} value={option.value}>
@@ -172,7 +177,9 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
                 </MenuItem>
               ))}
             </TextField>
-            <input type="submit" />
+            <button className="margin-top" type="submit">
+              Criar
+            </button>
           </form>
         </Box>
       </Modal>

@@ -4,14 +4,14 @@ header {
     align-items: center;
     height: 4rem;
     max-height: 4rem;
-    background-color: var(--white-100);
+    background-color: #0575e6;
     &__toggle {
-      color: var(--teal-500);
+      color: var(--white-100);
       margin-right: 0.45rem;
       cursor: pointer;
     }
     &__title {
-      color: var(--gray-300);
+      color: var(--white-100);
       text-transform: uppercase;
       h2 {
         font-weight: var(--is-700);
@@ -23,6 +23,12 @@ header {
     &__button {
       font-weight: var(--is-600);
       font-size: .80rem;
+    }
+    .logout {
+      background-color: var(--white-100);
+      color: #d32f2f;
+      justify-self: flex-end;
+      margin-right: 30px;
     }
   }
 }

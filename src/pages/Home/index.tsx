@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import IUser from '../../interfaces/IUser';
-import { logoutUser } from '../../services/session.service';
 import { getUsers } from '../../services/users.service';
 import CreateUserButton from '../../components/CreateUserButtonModal';
 import toastMsg, { ToastType } from '../../utils/toastMsg';
 import { AuthenticationContext } from '../../contexts/AuthenticationContext';
 import UsersTable from '../../components/Table';
 import './style.scss';
+import Header from '../../components/Header';
 
 export default function Home(): JSX.Element {
   const { isAdmin } = AuthenticationContext();
@@ -27,14 +27,11 @@ export default function Home(): JSX.Element {
 
   return (
     <>
+      <Header />
+
       <section className="content">
-        <h3>Usuários</h3>
-        <div className="buttons">
-          {isAdmin ? <CreateUserButton setUsers={setUsers} /> : ''}
-          <button className="logout" type="button" onClick={() => logoutUser()}>
-            Logout
-          </button>
-        </div>
+        <h3>Lista de usuários</h3>
+        <div className="buttons">{isAdmin ? <CreateUserButton setUsers={setUsers} /> : ''}</div>
 
         <UsersTable users={users} setUsers={setUsers} />
       </section>

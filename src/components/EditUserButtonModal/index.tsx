@@ -65,15 +65,15 @@ export default function EditUserButton({ user, setUsers }: Props): JSX.Element {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
+    borderRadius: '10px',
     bgcolor: 'background.paper',
-    border: '2px solid #000',
     boxShadow: 24,
     p: 4,
   };
 
   return (
     <>
-      <Button variant="outlined" onClick={handleOpen} startIcon={<EditIcon />}>
+      <Button variant="outlined" onClick={handleOpen} endIcon={<EditIcon />}>
         Editar
       </Button>
       <Modal
@@ -83,16 +83,14 @@ export default function EditUserButton({ user, setUsers }: Props): JSX.Element {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography id="modal-modal-title" variant="h5" component="h2">
             Editar usuário
           </Typography>
-          {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography> */}
           <form onSubmit={(event) => updateUserHandler(event, form)}>
-            <TextField disabled id="name" label="Nome" value={user.name} variant="outlined" />
-            <TextField disabled value={user.cpf} id="cpf" label="CPF" variant="outlined" />
+            <TextField className="margin-top" disabled id="name" label="Nome" value={user.name} variant="outlined" />
+            <TextField className="margin-top" disabled value={user.cpf} id="cpf" label="CPF" variant="outlined" />
             <TextField
+              className="margin-top"
               disabled
               value={formatDateBR(user.birthDate)}
               id="birthDate"
@@ -100,6 +98,7 @@ export default function EditUserButton({ user, setUsers }: Props): JSX.Element {
               variant="outlined"
             />
             <TextField
+              className="margin-top"
               inputProps={{
                 maxLength: 500,
               }}
@@ -111,12 +110,12 @@ export default function EditUserButton({ user, setUsers }: Props): JSX.Element {
               maxRows={6}
             />
             <TextField
+              className="margin-top"
               id="permission"
               select
               label="Permissão"
               value={form.permission}
               onChange={(e) => setForm({ ...form, permission: e.target.value })}
-              helperText="Selecione a permissão"
             >
               {permissions.map((option) => (
                 <MenuItem key={option.label} value={option.value}>
@@ -124,7 +123,9 @@ export default function EditUserButton({ user, setUsers }: Props): JSX.Element {
                 </MenuItem>
               ))}
             </TextField>
-            <input type="submit" />
+            <button type="submit" className="margin-top">
+              Editar
+            </button>
           </form>
         </Box>
       </Modal>

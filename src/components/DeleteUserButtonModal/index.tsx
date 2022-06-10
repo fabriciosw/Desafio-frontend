@@ -42,15 +42,15 @@ export default function DeleteUserButton({ id, setUsers }: Props): JSX.Element {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
+    borderRadius: '10px',
     bgcolor: 'background.paper',
-    border: '2px solid #000',
     boxShadow: 24,
     p: 4,
   };
 
   return (
     <>
-      <Button variant="outlined" onClick={handleOpen} color="error" startIcon={<DeleteIcon />}>
+      <Button variant="outlined" onClick={handleOpen} color="error" endIcon={<DeleteIcon />}>
         Deletar
       </Button>
       <Modal
@@ -61,12 +61,9 @@ export default function DeleteUserButton({ id, setUsers }: Props): JSX.Element {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Deletar usuário
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Deseja mesmo deletar esse usuário?
           </Typography>
-          <Button variant="contained" onClick={(e) => deleteUserHandler(e)} color="error">
+          <Button variant="contained" onClick={(e) => deleteUserHandler(e)} color="error" sx={{ mt: 2 }}>
             Deletar usuário
           </Button>
         </Box>

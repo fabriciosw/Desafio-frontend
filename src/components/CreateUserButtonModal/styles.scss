@@ -1,0 +1,19 @@
+form {
+  display: flex;
+  flex-direction: column;
+  .margin-top {
+    margin-top: 10px;
+  }
+  button {
+    padding: 15px 0;
+    background: #0575e6;
+    border-radius: 30px;
+    color: #ffffff;
+    border: 0px;
+    transition: 0.5s;
+
+    &:hover {
+      background-color: #0576e6b2;
+    }
+  }
+}
