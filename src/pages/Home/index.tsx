@@ -7,6 +7,7 @@ import { AuthenticationContext } from '../../contexts/AuthenticationContext';
 import UsersTable from '../../components/Table';
 import './style.scss';
 import Header from '../../components/Header';
+import Text from '../../components/Text';
 
 export default function Home(): JSX.Element {
   const { isAdmin } = AuthenticationContext();
@@ -30,7 +31,7 @@ export default function Home(): JSX.Element {
       <Header />
 
       <section className="content">
-        <h3>Lista de usuários</h3>
+        <Text as="h3" weight={500}>Lista de usuários</Text>
         <div className="buttons">{isAdmin ? <CreateUserButton setUsers={setUsers} /> : ''}</div>
 
         <UsersTable users={users} setUsers={setUsers} />

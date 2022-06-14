@@ -1,5 +1,10 @@
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import MenuItem from '@mui/material/MenuItem';
+import Modal from '@mui/material/Modal';
+import TextField, { TextFieldProps } from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 import React, { Dispatch, SetStateAction, useState } from 'react';
-import { TextField, TextFieldProps, Modal, Typography, Button, Box, MenuItem } from '@mui/material';
 import IUser from '../../interfaces/IUser';
 import { createUser, getUsers } from '../../services/users.service';
 import toastMsg, { ToastType } from '../../utils/toastMsg';

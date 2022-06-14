@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { AuthenticationContext } from '../../contexts/AuthenticationContext';
 import { loginUser } from '../../services/session.service';
 import './styles.scss';
+import Text from '../../components/Text'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const InputMask = require('react-input-mask');
@@ -25,14 +26,14 @@ export default function Login(): React.ReactElement {
     <div className="loginpage">
       <section className="leftside">
         <div className="text">
-          <h1>Portal do colaborador</h1>
-          <p>Desafio Trainee Softdesign</p>
+          <Text as="h1" weight={700}>Portal do colaborador</Text>
+          <Text as="p" weight={300}>Desafio Trainee Softdesign</Text>
         </div>
       </section>
       <section className="rightside">
         <div className="login-card">
-          <h3>Olá colaborador,</h3>
-          <h5>faça o seu login</h5>
+          <Text as="h3" weight={700}>Olá colaborador,</Text>
+          <Text as="h5">faça o seu login</Text>
           <form onSubmit={(event) => loginUserHandler(event, form)}>
             <div className="login-inputs">
               <InputMask
