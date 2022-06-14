@@ -31,7 +31,9 @@ export default function Home(): JSX.Element {
       <Header />
 
       <section className="content">
-        <Text as="h3" weight={500}>Lista de usuários</Text>
+        <Text as="h3" weight={500}>
+          Lista de usuários
+        </Text>
         <div className="buttons">{isAdmin ? <CreateUserButton setUsers={setUsers} /> : ''}</div>
 
         <UsersTable users={users} setUsers={setUsers} />

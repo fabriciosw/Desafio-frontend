@@ -36,17 +36,6 @@ export default function DeleteUserButton({ id, setUsers }: Props): JSX.Element {
       toastMsg(ToastType.Error, (error as Error).message);
     }
   };
-  const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    borderRadius: '10px',
-    bgcolor: 'background.paper',
-    boxShadow: 24,
-    p: 4,
-  };
 
   return (
     <>
@@ -59,7 +48,7 @@ export default function DeleteUserButton({ id, setUsers }: Props): JSX.Element {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box className="modal-style">
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Deseja mesmo deletar esse usuário?
           </Typography>

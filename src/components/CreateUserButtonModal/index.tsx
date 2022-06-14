@@ -81,19 +81,6 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
       label: 'Administrador',
     },
   ];
-
-  const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    borderRadius: '10px',
-    bgcolor: 'background.paper',
-    boxShadow: 24,
-    p: 4,
-  };
-
   return (
     <>
       <Button variant="contained" onClick={handleOpen}>
@@ -105,7 +92,7 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box className="modal-style">
           <Typography id="modal-modal-title" variant="h5" component="h2">
             Novo usuário
           </Typography>
