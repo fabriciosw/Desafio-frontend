@@ -7,6 +7,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import IUser from '../../interfaces/IUser';
 import { getUsers, deleteUser } from '../../services/users.service';
 import toastMsg, { ToastType } from '../../utils/toastMsg';
+import style from './styles.module.scss';
 
 interface Props {
   id: number;
@@ -48,7 +49,7 @@ export default function DeleteUserButton({ id, setUsers }: Props): JSX.Element {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box className="modal-style">
+        <Box className={style.modalStyle}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Deseja mesmo deletar esse usuário?
           </Typography>

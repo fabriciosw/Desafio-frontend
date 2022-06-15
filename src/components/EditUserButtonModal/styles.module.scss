@@ -1,8 +1,18 @@
+.modalStyle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  padding: 32px;
+}
 form {
   display: flex;
   flex-direction: column;
 
-  .margin-top {
+  .marginTop {
     margin-top: 10px;
   }
 

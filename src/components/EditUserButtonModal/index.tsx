@@ -6,10 +6,11 @@ import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem/MenuItem';
 import EditIcon from '@mui/icons-material/Edit';
-import { getUsers, updateUser } from '../../services/users.service';
+import style from './styles.module.scss';
 import IUser from '../../interfaces/IUser';
 import formatDateBR from '../../utils/formatDateBR';
 import toastMsg, { ToastType } from '../../utils/toastMsg';
+import { getUsers, updateUser } from '../../services/users.service';
 
 interface Props {
   user: IUser;
@@ -70,15 +71,22 @@ export default function EditUserButton({ user, setUsers }: Props): JSX.Element {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box className="modal-style">
+        <Box className={style.modalStyle}>
           <Typography id="modal-modal-title" variant="h5" component="h2">
             Editar usuário
           </Typography>
           <form onSubmit={(event) => updateUserHandler(event, form)}>
-            <TextField className="margin-top" disabled id="name" label="Nome" value={user.name} variant="outlined" />
-            <TextField className="margin-top" disabled value={user.cpf} id="cpf" label="CPF" variant="outlined" />
             <TextField
-              className="margin-top"
+              className={style.marginTop}
+              disabled
+              id="name"
+              label="Nome"
+              value={user.name}
+              variant="outlined"
+            />
+            <TextField className={style.marginTop} disabled value={user.cpf} id="cpf" label="CPF" variant="outlined" />
+            <TextField
+              className={style.marginTop}
               disabled
               value={formatDateBR(user.birthDate)}
               id="birthDate"
@@ -86,7 +94,7 @@ export default function EditUserButton({ user, setUsers }: Props): JSX.Element {
               variant="outlined"
             />
             <TextField
-              className="margin-top"
+              className={style.marginTop}
               inputProps={{
                 maxLength: 500,
               }}
@@ -98,7 +106,7 @@ export default function EditUserButton({ user, setUsers }: Props): JSX.Element {
               maxRows={6}
             />
             <TextField
-              className="margin-top"
+              className={style.marginTop}
               id="permission"
               select
               label="Permissão"
@@ -111,7 +119,7 @@ export default function EditUserButton({ user, setUsers }: Props): JSX.Element {
                 </MenuItem>
               ))}
             </TextField>
-            <button type="submit" className="margin-top">
+            <button type="submit" className={style.marginTop}>
               Editar
             </button>
           </form>
