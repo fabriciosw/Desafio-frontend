@@ -30,8 +30,8 @@ export default function DeleteUserButton({ id, setUsers }: Props): JSX.Element {
   const deleteUserHandler = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault();
     try {
-      const data = await deleteUser(id);
-      toastMsg(ToastType.Success, data);
+      await deleteUser(id);
+      toastMsg(ToastType.Success, 'User deleted');
       fetchUsers();
     } catch (error) {
       toastMsg(ToastType.Error, (error as Error).message);

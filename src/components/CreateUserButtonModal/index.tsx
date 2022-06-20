@@ -60,11 +60,11 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
       const data = await createUser(name, cpf, birthDate, password, obs, permission);
 
       setForm(cleanForm);
-      if (data === 'User created') {
-        toastMsg(ToastType.Success, data);
+      if (data.message === 'User created') {
+        toastMsg(ToastType.Success, data.message);
         handleClose();
         fetchUsers();
-      } else toastMsg(ToastType.Error, data);
+      } else toastMsg(ToastType.Error, data.message);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       toastMsg(ToastType.Error, error.response.data.message);

@@ -38,7 +38,7 @@ export default function EditUserButton({ user, setUsers }: Props): JSX.Element {
     event.preventDefault();
     try {
       const data = await updateUser(user.id, obs, permission);
-      toastMsg(ToastType.Success, data);
+      toastMsg(ToastType.Success, data.message);
       fetchUsers();
     } catch (error) {
       toastMsg(ToastType.Error, (error as Error).message);

@@ -17,14 +17,14 @@ export async function loginUser(
   await HttpClient.api
     .post('/session/', obj)
     .then((response) => {
-      const token = response.data;
+      const { token } = response.data;
       const decoded: { auth: string } = jwt_decode(token);
       const authorization = decoded.auth;
       if (authorization === 'true') setIsAdmin(true);
       localStorage.setItem('TOKEN_KEY', token);
       setIsAuthenticated(true);
       HttpClient.api.defaults.headers.common.Authorization = getTokenStorage();
-      toastMsg(ToastType.Success, 'Logged in');
+      toastMsg(ToastType.Success, response.data.message);
     })
     .catch((error) => {
       toastMsg(ToastType.Error, error.response.data.message);

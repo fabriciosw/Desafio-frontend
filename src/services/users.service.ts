@@ -14,12 +14,12 @@ export async function createUser(
   password: string,
   obs: string,
   permissionString: string
-): Promise<string> {
+): Promise<{ message: string }> {
   let permission = false;
   if (permissionString === 'true') permission = true;
 
   if (cpf.length !== 14) {
-    return 'CPF inválido';
+    return { message: 'CPF inválido' };
   }
 
   const birthDate = formatDateForDatabase(unformatedDate);
@@ -35,7 +35,7 @@ export async function createUser(
   return data;
 }
 
-export async function updateUser(id: number, obs: string, permissionString: string): Promise<string> {
+export async function updateUser(id: number, obs: string, permissionString: string): Promise<{ message: string }> {
   let permission = false;
   if (permissionString === 'true') permission = true;
 
@@ -47,7 +47,7 @@ export async function updateUser(id: number, obs: string, permissionString: stri
   return data;
 }
 
-export async function deleteUser(id: number): Promise<string> {
+export async function deleteUser(id: number): Promise<void> {
   const { data } = await HttpClient.api.delete(`/users/${id}`);
   return data;
 }
