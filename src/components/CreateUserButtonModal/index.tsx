@@ -1,3 +1,6 @@
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
@@ -34,7 +37,7 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
   const cleanForm = {
     cpf: '',
     name: '',
-    birthDate: '',
+    birthDate: new Date(''),
     password: '',
     obs: '',
     permission: 'false',
@@ -44,7 +47,7 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
 
   interface CreateUser {
     name: string;
-    birthDate: string;
+    birthDate: Date;
     obs: string;
     cpf: string;
     permission: string;
@@ -96,81 +99,84 @@ export default function CreateUserButton({ setUsers }: Props): JSX.Element {
           <Typography id="modal-modal-title" variant="h5" component="h2">
             Novo usuário
           </Typography>
-          <form onSubmit={(event) => createUserHandler(event, form)}>
-            <TextField
-              className={style.marginTop}
-              inputProps={{
-                maxLength: 120,
-              }}
-              required
-              id="name"
-              label="Nome"
-              value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
-              variant="outlined"
-            />
-            <InputMask
-              className={style.marginTop}
-              mask="999.999.999-99"
-              onChange={(evento: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, cpf: evento.target.value })}
-              value={form.cpf}
-            >
-              {(inputProps: JSX.IntrinsicAttributes & TextFieldProps) => (
-                <TextField {...inputProps} variant="outlined" id="cpf" label="CPF" required />
-              )}
-            </InputMask>
-            <InputMask
-              className={style.marginTop}
-              mask="99/99/9999"
-              onChange={(evento: React.ChangeEvent<HTMLInputElement>) =>
-                setForm({ ...form, birthDate: evento.target.value })
-              }
-              value={form.birthDate}
-            >
-              {(inputProps: JSX.IntrinsicAttributes & TextFieldProps) => (
-                <TextField {...inputProps} variant="outlined" id="birthDate" label="Data de nascimento" required />
-              )}
-            </InputMask>
-            <TextField
-              className={style.marginTop}
-              required
-              value={form.password}
-              onChange={(e) => setForm({ ...form, password: e.target.value })}
-              id="password"
-              label="Senha"
-              type="password"
-              variant="outlined"
-            />
-            <TextField
-              className={style.marginTop}
-              inputProps={{
-                maxLength: 500,
-              }}
-              value={form.obs}
-              onChange={(e) => setForm({ ...form, obs: e.target.value })}
-              id="obs"
-              label="Observação"
-              multiline
-              maxRows={6}
-            />
-            <TextField
-              className={style.marginTop}
-              id="permission"
-              select
-              label="Permissão"
-              value={form.permission}
-              onChange={(e) => setForm({ ...form, permission: e.target.value })}
-            >
-              {permissions.map((option) => (
-                <MenuItem key={option.label} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-            <button className={style.marginTop} type="submit">
-              Criar
-            </button>
-          </form>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <form onSubmit={(event) => createUserHandler(event, form)}>
+              <TextField
+                className={style.marginTop}
+                inputProps={{
+                  maxLength: 120,
+                }}
+                required
+                id="name"
+                label="Nome"
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                variant="outlined"
+              />
+              <InputMask
+                className={style.marginTop}
+                mask="999.999.999-99"
+                onChange={(evento: React.ChangeEvent<HTMLInputElement>) =>
+                  setForm({ ...form, cpf: evento.target.value })
+                }
+                value={form.cpf}
+              >
+                {(inputProps: JSX.IntrinsicAttributes & TextFieldProps) => (
+                  <TextField {...inputProps} variant="outlined" id="cpf" label="CPF" required />
+                )}
+              </InputMask>
+              <DatePicker
+                views={['day', 'month', 'year']}
+                label="Data de nascimento"
+                value={form.birthDate}
+                mask="__/__/____"
+                inputFormat="dd/MM/yyyy"
+                onChange={(value) => {
+                  setForm({ ...form, birthDate: new Date(value || '') });
+                }}
+                renderInput={(params) => <TextField {...params} required className={style.marginTop} />}
+              />
+              <TextField
+                className={style.marginTop}
+                required
+                value={form.password}
+                onChange={(e) => setForm({ ...form, password: e.target.value })}
+                id="password"
+                label="Senha"
+                type="password"
+                variant="outlined"
+              />
+              <TextField
+                className={style.marginTop}
+                inputProps={{
+                  maxLength: 500,
+                }}
+                value={form.obs}
+                onChange={(e) => setForm({ ...form, obs: e.target.value })}
+                id="obs"
+                label="Observação"
+                multiline
+                maxRows={6}
+              />
+              <TextField
+                className={style.marginTop}
+                id="permission"
+                select
+                label="Permissão"
+                value={form.permission}
+                onChange={(e) => setForm({ ...form, permission: e.target.value })}
+              >
+                {permissions.map((option) => (
+                  <MenuItem key={option.label} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+              <button className={style.marginTop} type="submit">
+                Criar
+              </button>
+            </form>
+          </LocalizationProvider>
         </Box>
       </Modal>
     </>

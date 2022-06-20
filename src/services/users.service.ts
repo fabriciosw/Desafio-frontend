@@ -1,6 +1,5 @@
 import HttpClient from './httpClient';
 import IUser from '../interfaces/IUser';
-import formatDateForDatabase from '../utils/formatDateForDatabase';
 
 export async function getUsers(): Promise<IUser[]> {
   const { data } = await HttpClient.api.get<IUser[]>('/users');
@@ -10,7 +9,7 @@ export async function getUsers(): Promise<IUser[]> {
 export async function createUser(
   name: string,
   cpf: string,
-  unformatedDate: string,
+  birthDate: Date,
   password: string,
   obs: string,
   permissionString: string
@@ -22,7 +21,6 @@ export async function createUser(
     return { message: 'CPF inválido' };
   }
 
-  const birthDate = formatDateForDatabase(unformatedDate);
   const obj = {
     name,
     cpf,
