@@ -1,10 +1,8 @@
 import React from 'react';
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import IUser from '../../interfaces/IUser';
-import DeleteUserButton from '../DeleteUserButtonModal';
-import EditUserButton from '../EditUserButtonModal';
 import { AuthenticationContext } from '../../contexts/AuthenticationContext';
-import formatDateBR from '../../utils/formatDateBR';
+import TableContent from './TableContent';
 
 interface Props {
   users: IUser[];
@@ -27,23 +25,7 @@ export default function UsersTable({ users, setUsers }: Props): JSX.Element {
       </TableHead>
       <TableBody>
         {users.map((user) => (
-          <TableRow hover key={user.id}>
-            <TableCell align="center">{user.name}</TableCell>
-            <TableCell align="center">{formatDateBR(user.birthDate)}</TableCell>
-            <TableCell align="center">{user.cpf}</TableCell>
-            <TableCell align="center">{user.permission ? 'Administrador' : 'Colaborador'}</TableCell>
-            <TableCell align="center" sx={{ maxWidth: 400 }}>
-              {user.obs}
-            </TableCell>
-            {isAdmin ? (
-              <TableCell align="center">
-                <DeleteUserButton id={user.id} setUsers={setUsers} />
-                <EditUserButton user={user} setUsers={setUsers} />
-              </TableCell>
-            ) : (
-              ''
-            )}
-          </TableRow>
+          <TableContent user={user} setUsers={ setUsers } />
         ))}
       </TableBody>
     </Table>
